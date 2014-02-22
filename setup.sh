@@ -4,6 +4,7 @@ cd
 ln -s ~/.dotfiles/bash_completions .bash_completions
 ln -s ~/.dotfiles/dotbash_functions .bash_functions
 ln -s ~/.dotfiles/dotaliases .aliases
+ln -s ~/.dotfiles/dotngrok .ngrok
 #ln -s ~/.dotfiles/dotemacs.el .emacs
 ln -s ~/.dotfiles/dotvimrc .vimrc
 ln -s ~/.dotfiles/dotirbrc .irbrc
