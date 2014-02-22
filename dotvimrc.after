@@ -1,0 +1,2 @@
+colorscheme zenburn 
+let g:used_javascript_libs = 'angularjs,jquery,jasmine'
