@@ -101,6 +101,8 @@ fi
 
 #export RUBYOPT=rubygems
 
+complete -o default -o nospace -W "$(grep -i -e '^host ' ~/.ssh/config | awk '{print substr($0, index($0,$2))}' ORS=' ')" ssh scp sftp
+
 # DANGER DANGER DANGER - Do not just slap paths in here willy-nilly. If it's a path to something outside of ~, it should probably go in /etc/paths.d!
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:~/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 # put MY bin first, THEN homebrew, THEN ports.
@@ -128,3 +130,9 @@ export MANPATH=/usr/local/share/man:$MANPATH
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 rvm default 1.9.3-p448
+
+hitch() {
+  command hitch "$@"
+  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
+}
+alias unhitch='hitch -u'
