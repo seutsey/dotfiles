@@ -4,7 +4,7 @@
 alias ls="ls -G"
 alias ll="ls -l"
 alias 'top'='top -o cpu'
-alias 't'='tree -ChL 1'
+#alias 't'='tree -ChL 1'
 alias 'up'='cd ..'
 alias 'up2'='cd ../..'
 alias 'up3'='cd ../../..'
@@ -18,6 +18,10 @@ alias 'up9'='cd ../../../../../../../../..'
 alias 'tps'='tmux-pair-start'
 alias 'tpa'='tmux-pair-attach'
 alias 'tpk'='tmux-pair-stop'
+
+alias 'tos'='tmux-onlife-start'
+alias 'toa'='tmux-onlife-attach'
+alias 'tok'='tmux-onlife-kill'
 
 # Fidelity
 alias rmp12='rmount dev-cmeadows-ub12:/home/cmeadows/pinkbox'
@@ -34,8 +38,8 @@ alias vu10s='vu10 && ssh dev-cmeadows-ub10'
 # Emacs Prelude
 alias e='emacsclient -t'
 alias ec='emacsclient -c'
-#alias vim='emacsclient -t'
-alias vi='emacsclient -t'
+alias vim='vim -N'
+alias v='vim -N'
 alias ed='emacs --daemon'
 
 # Programming crap
@@ -51,8 +55,14 @@ alias berc='COVERAGE=1 bundle exec rspec'
 alias bers='bundle exec rspec spec'
 alias brdm='bundle exec rake db:migrate'
 alias brtp='bundle exec rake db:test:prepare'
+alias brtpp='bundle exec rake parallel:prepare'
+alias brtc='bundle exec rake teamcity:ci_parallel'
 
 alias rtp='rake db:test:prepare'
+
+alias zr='zeus rspec'
+alias zc='zeus console'
+alias zu='zeus start'
 
 ## Misc Programming
 alias findrb='find . -name "*.rb" -print0 | xargs -0 grep -Hn'

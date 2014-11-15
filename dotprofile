@@ -1,7 +1,7 @@
-export EDITOR=$(echo `which emacs` -q -l ~/.emacstiny)
-export GEMEDITOR=$(echo `which emacs` )
-export CVSEDITOR=$(echo `which emacs` -q -l ~/.emacstiny)
-export SVN_EDITOR=$(echo `which emacs` -q -l ~/.emacstiny)
+export EDITOR=$(echo `which vim` -N)
+export GEMEDITOR=$(echo `which vim` )
+export CVSEDITOR=$(echo `which vim` -N)
+export SVN_EDITOR=$(echo `which vim` -N)
 #export JAVA_HOME='/System/Library/Frameworks/JavaVM.framework/Home'
 export JSTESTDRIVER_HOME=~/devel/jsTestDriver/
 
@@ -92,6 +92,7 @@ source_files ~/.aliases \
 
 #this must come after git-completion.bash has been sourced
 complete -o default -o nospace -F _git_checkout go
+complete -W "`cat ~/.hcl/aliases`" hcl
 
 if command -v ps1_set >/dev/null 2>&1 ; then
     ps1_set --prompt ∫
@@ -136,3 +137,4 @@ hitch() {
   if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
 }
 alias unhitch='hitch -u'
+

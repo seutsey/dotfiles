@@ -1,2 +1,49 @@
-colorscheme zenburn 
+colorscheme zenburn
 let g:used_javascript_libs = 'angularjs,jquery,jasmine'
+
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  "let cmd = 'ctags -R ' . tagfilename . ' "' . cwd . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+autocmd BufWritePost *.cpp,*.h,*.c,*.rb,*.js call UpdateTags()
+
+function! UpdateProjectTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  "let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  let cmd = 'ctags -R ' . tagfilename . ' "' . cwd . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+
+map <Leader>= :Tab /=<CR>
+map <Leader>h :Tab /=><CR>
+map <Leader>: :Tab /:<CR>
+
+autocmd BufWritePre * :%s/\s\+$//e
