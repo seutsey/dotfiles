@@ -105,7 +105,7 @@ fi
 complete -o default -o nospace -W "$(grep -i -e '^host ' ~/.ssh/config | awk '{print substr($0, index($0,$2))}' ORS=' ')" ssh scp sftp
 
 # DANGER DANGER DANGER - Do not just slap paths in here willy-nilly. If it's a path to something outside of ~, it should probably go in /etc/paths.d!
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:~/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.3/bin
 # put MY bin first, THEN homebrew, THEN ports.
 export MANPATH=/usr/local/share/man:$MANPATH
 
@@ -128,9 +128,9 @@ export MANPATH=/usr/local/share/man:$MANPATH
 # For some reason unbeknownst to me, emacs started from the CLI opens an XWindows version of emacs but with keyboard input still locked to the terminal.
 #alias 'emacs'='emacs -nw'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-rvm default 1.9.3-p448
+rvm default 2.2.0
 
 hitch() {
   command hitch "$@"
