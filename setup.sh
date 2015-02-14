@@ -14,5 +14,6 @@ ln -s ~/.dotfiles/dotprofile .profile
 ln -s ~/.dotfiles/dottmux.conf .tmux.conf
 ln -s ~/.dotfiles/dotemacstiny.el .emacstiny
 ln -s ~/.dotfiles/dotvimrc.after .vimrc.after
+ln -s ~/.dotfiles/dotjshintrc .jshintrc
 ln -s ~/.dotfiles/git-completion.bash .git-completion.bash
 cd ~/.dotfiles
