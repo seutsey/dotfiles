@@ -1,13 +1,7 @@
-auth_token: 6DpG5CMGzmke5_K7be-T
+auth_token: UacQyP210FyM611uoU98
 
 tunnels:
-  docusign:
-    subdomain: 'cmdocu3245'
-    proto:
-      http: 8080
-    proto:
-      https: 8080
   ssh:
-    remote_port: 60634
-    proto: 
+    remote_port: 60267
+    proto:
       tcp: 22

@@ -2,4 +2,4 @@
 PATH=$HOME/.rvm/bin:$PATH:/usr/local/texlive/2013basic/bin/universal-darwin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH:/usr/texbin"

@@ -92,7 +92,7 @@ source_files ~/.aliases \
 
 #this must come after git-completion.bash has been sourced
 complete -o default -o nospace -F _git_checkout go
-complete -W "`cat ~/.hcl/aliases`" hcl
+#complete -W "`cat ~/.hcl/aliases`" hcl
 
 if command -v ps1_set >/dev/null 2>&1 ; then
     ps1_set --prompt ∫
@@ -105,7 +105,7 @@ fi
 complete -o default -o nospace -W "$(grep -i -e '^host ' ~/.ssh/config | awk '{print substr($0, index($0,$2))}' ORS=' ')" ssh scp sftp
 
 # DANGER DANGER DANGER - Do not just slap paths in here willy-nilly. If it's a path to something outside of ~, it should probably go in /etc/paths.d!
-export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.3/bin
+export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.4/bin
 # put MY bin first, THEN homebrew, THEN ports.
 export MANPATH=/usr/local/share/man:$MANPATH
 
@@ -128,9 +128,15 @@ export MANPATH=/usr/local/share/man:$MANPATH
 # For some reason unbeknownst to me, emacs started from the CLI opens an XWindows version of emacs but with keyboard input still locked to the terminal.
 #alias 'emacs'='emacs -nw'
 
+# ~/.bash_profile (or some other login setup)
+ssh-add -L &> /dev/null
+if [ $? -eq 1 ]; then
+  ssh-add
+fi
+
 PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-rvm default 2.2.0
+rvm default 2.0.0
 
 hitch() {
   command hitch "$@"
@@ -138,3 +144,11 @@ hitch() {
 }
 alias unhitch='hitch -u'
 
+
+_ssh_auth_save() {
+  ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock"
+}
+
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/git/cmm/venv
+#source /Users/cmeadows/git/cmm/HamSAML/venv/bin/virtualenvwrapper.sh

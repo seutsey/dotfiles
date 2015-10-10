@@ -19,9 +19,9 @@ alias 'tps'='tmux-pair-start'
 alias 'tpa'='tmux-pair-attach'
 alias 'tpk'='tmux-pair-stop'
 
-alias 'tos'='tmux-onlife-start'
-alias 'toa'='tmux-onlife-attach'
-alias 'tok'='tmux-onlife-kill'
+alias 'tcs'='tmux-cmm-start'
+alias 'tca'='tmux-cmm-attach'
+alias 'tck'='tmux-cmm-kill'
 
 # Fidelity
 alias rmp12='rmount dev-cmeadows-ub12:/home/cmeadows/pinkbox'
@@ -102,7 +102,9 @@ alias acr='apachectl configtest && sudo apachectl restart'
 alias 'aqm'='aqmigration'
 alias 'rc'='rake cucumber'
 alias go='git checkout'
+alias gb='git branch'
 alias gff='git flow feature'
+alias glop='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 
 # how big is this terminal?
@@ -112,7 +114,7 @@ alias 'xy'='echo ${COLUMNS}x${LINES}'
 alias hop_master_push='export TMP_CURRBRANCH=$(git-currentbranch) && git checkout master && echo "Hopping to master to merge, test and push..." && git merge $TMP_CURRBRANCH && echo "Pulling master from origin..." && git pull origin master && git merge origin/master && echo "Running all specs..." && ./all_specs.sh && echo "Pushing changes..." && git push origin master && echo "Hopping back to $TMP_CURRENTBRANCH" && git checkout $TMP_CURRBRANCH && export $TMP_CURRBRANCH='
 
 alias etags=/usr/local/bin/ctags
-alias tagit='etags -e -R .'
+alias tagit='etags -e -R --extra=+fq --exclude=db --exclude=doc --exclude=log --exclude=tmp --exclude=.git --exclude=public .'
 alias tb=torquebox
 
 alias atp='ln -s  ~/.pow .'
@@ -120,3 +122,15 @@ alias pows='curl -H host:pow localhost/status.json'
 alias powe='curl -H host:pow localhost/env.json'
 alias powc='curl -H host:pow localhost/config.json'
 alias powk='touch ~/.pow/restart.txt'
+
+alias ap='addpair'
+alias carbon='python /opt/graphite/bin/carbon-cache.py'
+alias graphite-web='python /opt/graphite/bin/run-graphite-devel-server.py /opt/graphite'
+alias statsd='sudo node ~/git/statsd/stats.js ~/git/statsd/config.js'
+
+alias installpg='gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.4/bin/pg_config'
+alias startredis='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
+alias stopredis='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
+
+alias pinge3='pingcmme3'
+alias pinge3a='pingcmme3all'

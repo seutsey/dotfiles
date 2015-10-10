@@ -1,6 +1,9 @@
 colorscheme zenburn
 let g:used_javascript_libs = 'angularjs,jquery,jasmine'
 
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
 command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
 function! QuickfixFilenames()
   " Building a hash ensures we get each buffer only once
@@ -45,5 +48,6 @@ endfunction
 map <Leader>= :Tab /=<CR>
 map <Leader>h :Tab /=><CR>
 map <Leader>: :Tab /:<CR>
+map <Leader><Space> :Tab /^[^:]*:\zs<CR>
 
 autocmd BufWritePre * :%s/\s\+$//e
