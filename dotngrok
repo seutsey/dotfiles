@@ -2,6 +2,6 @@ auth_token: UacQyP210FyM611uoU98
 
 tunnels:
   ssh:
-    remote_port: 60267
+    remote_port: 60668
     proto:
       tcp: 22

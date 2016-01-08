@@ -36,7 +36,8 @@ alias vu12s='vu12 && ssh dev-cmeadows-ub12'
 alias vu10s='vu10 && ssh dev-cmeadows-ub10'
 
 # Emacs Prelude
-alias e='emacsclient -t'
+alias e='emacs'
+# alias e='emacsclient -t'
 alias ec='emacsclient -c'
 alias vim='vim -N'
 alias v='vim -N'
@@ -76,10 +77,11 @@ alias sss="script/spec_server"
 ## Git
 alias gpmm="echo 'git push monkey master' && git push monkey master"
 alias gpom="echo 'git push origin master' && git push origin master"
-alias gst="echo 'git status' && git status"
+alias gst="echo 'git status --short -b' && git status --short -b"
 alias gsi="echo 'git submodule init' && git submodule init"
 alias gsu="echo 'git submodule update' && git submodule update"
 alias gca="echo 'git commit -a' && git commit -a"
+alias g="git"
 
 alias gf='git flow'
 alias gff='git flow feature'
@@ -134,3 +136,5 @@ alias stopredis='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.pli
 
 alias pinge3='pingcmme3'
 alias pinge3a='pingcmme3all'
+
+alias search_segfault='for i in 1 2 3; do echo "***************$i*************"; ssh lcpepamotron$i.cmmint.net "grep Segmentation /pub/epamotron/shared/log/*.log"; done'
