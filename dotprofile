@@ -1,7 +1,7 @@
-export EDITOR=$(echo `which vim` -N)
-export GEMEDITOR=$(echo `which vim` )
-export CVSEDITOR=$(echo `which vim` -N)
-export SVN_EDITOR=$(echo `which vim` -N)
+export EDITOR=$(echo `which emacs`)
+export GEMEDITOR=$(echo `which emacs` )
+export CVSEDITOR=$(echo `which emacs`)
+export SVN_EDITOR=$(echo `which emacs`)
 #export JAVA_HOME='/System/Library/Frameworks/JavaVM.framework/Home'
 export JSTESTDRIVER_HOME=~/devel/jsTestDriver/
 
@@ -105,7 +105,7 @@ fi
 complete -o default -o nospace -W "$(grep -i -e '^host ' ~/.ssh/config | awk '{print substr($0, index($0,$2))}' ORS=' ')" ssh scp sftp
 
 # DANGER DANGER DANGER - Do not just slap paths in here willy-nilly. If it's a path to something outside of ~, it should probably go in /etc/paths.d!
-export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.4/bin
+export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.4/bin:/Users/cmeadows/.asdf/installs/elixir/1.4.2/.mix/escripts
 # put MY bin first, THEN homebrew, THEN ports.
 export MANPATH=/usr/local/share/man:$MANPATH
 
@@ -152,3 +152,7 @@ _ssh_auth_save() {
 #export WORKON_HOME=$HOME/.virtualenvs
 #export PROJECT_HOME=$HOME/git/cmm/venv
 #source /Users/cmeadows/git/cmm/HamSAML/venv/bin/virtualenvwrapper.sh
+
+# DVM related loads
+[[ -s "$(brew --prefix dvm)/dvm.sh" ]] && source "$(brew --prefix dvm)/dvm.sh"
+[[ -s "$(brew --prefix dvm)/bash_completion" ]] && source "$(brew --prefix dvm)/bash_completion"

@@ -22,6 +22,8 @@ alias 'tpk'='tmux-pair-stop'
 alias 'tcs'='tmux-cmm-start'
 alias 'tca'='tmux-cmm-attach'
 alias 'tck'='tmux-cmm-kill'
+alias 'tmc'="tmate display -p '#{tmate_ssh}'"
+alias 'tmlink'="tmate show-messages | grep 'ssh session: ssh -p' | tail -2 | cut -d' ' -f9- | pbcopy"
 
 # Fidelity
 alias rmp12='rmount dev-cmeadows-ub12:/home/cmeadows/pinkbox'
@@ -52,6 +54,7 @@ alias beg='bundle exec guard'
 alias bec='bundle exec cucumber'
 alias becw='bundle exec cucumber --profile wip'
 alias ber='bundle exec rspec'
+alias berf='bundle exec rspec --fail-fast'
 alias berc='COVERAGE=1 bundle exec rspec'
 alias bers='bundle exec rspec spec'
 alias brdm='bundle exec rake db:migrate'
@@ -103,7 +106,7 @@ alias zf=~/pe/zend/bin/zf.sh
 alias acr='apachectl configtest && sudo apachectl restart'
 alias 'aqm'='aqmigration'
 alias 'rc'='rake cucumber'
-alias go='git checkout'
+alias gco='git checkout'
 alias gb='git branch'
 alias gff='git flow feature'
 alias glop='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
@@ -138,3 +141,7 @@ alias pinge3='pingcmme3'
 alias pinge3a='pingcmme3all'
 
 alias search_segfault='for i in 1 2 3; do echo "***************$i*************"; ssh lcpepamotron$i.cmmint.net "grep Segmentation /pub/epamotron/shared/log/*.log"; done'
+
+alias phgrep='cat ~/.persistent_history|grep --color'
+
+alias dockervolkill='docker volume rm $(/usr/local/bin/docker volume ls -f dangling=true -q)'
