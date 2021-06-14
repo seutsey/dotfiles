@@ -50,4 +50,6 @@ run_on_prompt_command()
     log_bash_persistent_history
 }
 
+source ~/.git-prompt.sh
+
 PROMPT_COMMAND="run_on_prompt_command"

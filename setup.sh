@@ -17,4 +17,8 @@ ln -s ~/.dotfiles/dotvimrc.after .vimrc.after
 ln -s ~/.dotfiles/dotjshintrc .jshintrc
 ln -s ~/.dotfiles/dotspacemacs .spacemacs
 ln -s ~/.dotfiles/git-completion.bash .git-completion.bash
+ln -s ~/.dotfiles/dotgit-prompt.sh .git-prompt.sh
 cd ~/.dotfiles
+
+# Change Zsh to Bash
+#chsh -s /bin/bash

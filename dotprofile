@@ -100,6 +100,8 @@ else
     export PS1="!!! It's \D{%H} O'Clock! Time to install rvm to fix your prompt!\n$ "
 fi
 
+PS1='[\u@\h \W$(__git_ps1 " (%s)")]\∫ '
+
 #export RUBYOPT=rubygems
 
 complete -o default -o nospace -W "$(grep -i -e '^host ' ~/.ssh/config | awk '{print substr($0, index($0,$2))}' ORS=' ')" ssh scp sftp

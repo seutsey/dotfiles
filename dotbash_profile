@@ -1,5 +1,6 @@
 source ~/.profile
 
+source ~/.git-prompt.sh
 
 . $HOME/.asdf/asdf.sh
 

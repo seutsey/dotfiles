@@ -1713,8 +1713,8 @@ _gitk ()
 	__git_complete_revlist
 }
 
-complete -o default -o nospace -F _git git
-complete -o default -o nospace -F _gitk gitk
+#complete -o default -o nospace -F _git git
+#complete -o default -o nospace -F _gitk gitk
 
 # The following are necessary only for Cygwin, and only are needed
 # when the user has tab-completed the executable name and consequently

@@ -58,7 +58,7 @@ _mysqldbs()
         return 0
     fi
 }
-complete -o default -o nospace -F _mysqldbs mysql
+#complete -o default -o nospace -F _mysqldbs mysql
 
 # Custom expansion for mategem
 _gemdirs()
@@ -70,10 +70,10 @@ _gemdirs()
     COMPREPLY=($(compgen -W '$(ls $gems)' -- $curw));
     return 0
 }
-complete -F _gemdirs -o dirnames mategem
-complete -F _gemdirs -o dirnames emgem
+#complete -F _gemdirs -o dirnames mategem
+#complete -F _gemdirs -o dirnames emgem
 # cdgem is just an alias script for "cd", but this lets me get
 # tab-completion into the gems folder. Why yes, I am that
 # lazy^H^H^H^Hclever, thank you for asking.
-complete -F _gemdirs -o dirnames cdgem
+#complete -F _gemdirs -o dirnames cdgem
 
