@@ -196,7 +196,7 @@
                ((org-agenda-overriding-header "Habits")
                 (org-agenda-sorting-strategy
                  '(todo-state-down effort-up category-keep))))
-              (" " "Agenda"
+              ("A" "Agenda"
                ((agenda "" nil)
                 (tags "REFILE"
                       ((org-agenda-overriding-header "Tasks to Refile")
@@ -1747,7 +1747,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (setq org-link-mailto-program (quote (compose-mail "%a" "%s")))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-(require 'smex)
+;; (require 'smex)
 (smex-initialize)
 
 (global-set-key (kbd "M-x") 'smex)

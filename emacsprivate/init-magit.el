@@ -5,7 +5,7 @@
 (setq magit-commit-show-diff nil)
 
 ;; Start commit in insert mode
-(add-hook 'git-commit-mode-hook 'evil-insert-state)
+;;(add-hook 'git-commit-mode-hook 'evil-insert-state)
 
 ;; Use C-n/C-p to navigate sections
 (with-eval-after-load 'magit

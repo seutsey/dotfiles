@@ -41,8 +41,8 @@ alias vu10s='vu10 && ssh dev-cmeadows-ub10'
 alias e='emacs'
 # alias e='emacsclient -t'
 alias ec='emacsclient -c'
-alias vim='vim -N'
-alias v='vim -N'
+alias vim='nvim -N'
+alias v='nvim -N'
 alias ed='emacs --daemon'
 
 # Programming crap
