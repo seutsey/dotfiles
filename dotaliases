@@ -146,3 +146,9 @@ alias search_segfault='for i in 1 2 3; do echo "***************$i*************";
 alias phgrep='cat ~/.persistent_history|grep --color'
 
 alias dockervolkill='docker volume rm $(/usr/local/bin/docker volume ls -f dangling=true -q)'
+
+
+alias tt="taskwarrior-tui"
+
+alias ts="/usr/local/bin/tsung"
+alias tsr="/usr/local/Cellar/tsung/1.7.0/lib/tsung/bin/tsung_stats.pl"
