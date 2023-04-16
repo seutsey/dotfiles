@@ -1,9 +1,12 @@
-npm-check-updates
-prettier
 aws-cdk
+js-beautify
 json-to-plantuml
 neovim
+npm
+npm-check-updates
+prettier
 protobufjs
+serverless
 tslint
 typescript
 typescript-language-server

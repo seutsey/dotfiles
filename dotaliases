@@ -152,3 +152,6 @@ alias tt="taskwarrior-tui"
 
 alias ts="/usr/local/bin/tsung"
 alias tsr="/usr/local/Cellar/tsung/1.7.0/lib/tsung/bin/tsung_stats.pl"
+
+alias aca-py='docker run --net=host bcgovimages/aries-cloudagent:py36-1.16-1_0.7.3'
+alias aca-py-stopall='docker stop $(docker ps -q --filter ancestor=bcgovimages/aries-cloudagent:py36-1.16-1_0.7.3 )'
