@@ -27,10 +27,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-ask-for-lazy-installation t
 
    ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path
-   '(
-   )
+   ;; Paths must have a trailing slash (i.e. "~/.mycontribs/")
+   dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
@@ -54,7 +52,8 @@ This function should only modify configuration layer settings."
      ruby-on-rails
      ;; erlang
      ;; elixir
-     javascript
+     (javascript :variables
+                 javascript-repl 'nodejs)
      react
      git
      shell
@@ -69,20 +68,19 @@ This function should only modify configuration layer settings."
           ;; org-enable-jira-support t
           ;; jiralib-url "https://jira.collegeboard.org"
           org-enable-sticky-header t
-          org-enable-roam-support t
+          ;; org-enable-roam-support t
           ;; org-enable-roam-ui t
           )
-     org-config
      ;; gtd
      ;; org-habit
      colors
      ;; ipython-notebook
      osx
      dap
-     (lsp :variables
-          lsp-rust-server 'rust-analyzer
-          cargo-process-reload-on-modify t
-          rust-format-on-save t)
+     ;; (lsp :variables
+     ;;      lsp-rust-server 'rust-analyzer
+     ;;      cargo-process-reload-on-modify t
+     ;;      rust-format-on-save t)
      ;; (debug :variables debug-additional-debuggers '("node-inspect" "rdebug"))
      (typescript :variables
                  typescript-fmt-on-save t
@@ -94,7 +92,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      ;; auto-completion
      ;; better-defaults
-     ;; emacs-lisp
+     emacs-lisp
      ;; git
      helm
      ;; markdown
@@ -119,7 +117,10 @@ This function should only modify configuration layer settings."
                                       (evil-magit :location (recipe
                                                              :fetcher github
                                                              :repo "emacs-evil/evil-magit"))
-
+                                      ;; (copilot :location (recipe
+                                      ;;                     :fetcher github
+                                      ;;                     :repo "zerolfx/copilot.el"
+                                      ;;                     :files ("*.el" "dist")))
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -493,7 +494,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -665,24 +666,26 @@ dump.")
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  (global-linum-mode 1)
+  (setq global-linum-mode 1)
   (global-set-key "\M-x" 'helm-M-x)
   (setq projectile-enable-caching t)
   (setq recentf-save-file (format "/tmp/recentf.%s" (emacs-pid)))
   (setq redisplay-dont-pause t)
   (setq rust-format-on-save t)
-  ;; (org-babel-do-load-languages
-  ;;  'org-babel-load-languages
-  ;;  '((plantuml . t)))
-  ;; (setq org-plantuml-jar-path
-  ;;       (expand-file-name "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar"))
-  ;; ;; Enable puml-mode for PlantUML files
-  ;; (setq puml-plantuml-jar-path
-  ;;       (expand-file-name "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar"))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)))
+  ;; Enable puml-mode for PlantUML files
+  (setq puml-plantuml-jar-path
+        (expand-file-name "/usr/local/Cellar/plantuml/1.2023.6/libexec/plantuml.jar"))
+  (setq org-plantuml-jar-path
+        (expand-file-name "/usr/local/Cellar/plantuml/1.2023.6/libexec/plantuml.jar"))
+  (setq plantuml-jar-path
+        (expand-file-name "/usr/local/Cellar/plantuml/1.2023.6/libexec/plantuml.jar"))
 
   (add-to-list 'load-path (expand-file-name "private" "~/.emacs.d/"))
   ;; (require 'init-deft)
-  (require 'init-org-roam)
+  ;; (require 'init-org-roam)
   (require 'init-elixir)
   (require 'init-cfn)
   (require 'init-magit)
@@ -691,7 +694,12 @@ layers configuration."
   ;; (require 'init-simple-org)
 
   ;; (require 'org-habit)
-  (require 'dap-cpptools)
+  ;; (require 'dap-cpptools)
+
+  ;; (global-set-key "\C-crf" 'org-roam-node-find)
+  ;; (global-set-key "\C-cri" 'org-roam-node-insert)
+  ;; (global-set-key "\C-crt" 'org-roam-dailies-goto-today)
+  ;; (global-set-key "\C-crT" 'org-roam-dailies-capture-today)
 
   (setq-default
    ;; js2-mode
@@ -717,6 +725,18 @@ layers configuration."
   (with-eval-after-load 'org
     (org-defkey org-mode-map [(meta return)] 'org-meta-return)  ;; The actual fix
     )
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends))
+
+  ;; (with-eval-after-load 'copilot
+  ;;   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  ;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+  ;;   (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+  ;;   (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
+
+  ;; (add-hook 'prog-mode-hook 'copilot-mode)
+
   (add-to-list 'auto-mode-alist '("\\.pu\\'" . plantuml-mode))
   (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
@@ -745,7 +765,7 @@ layers configuration."
     (("github" :url "https://api.github.com" :remote-regexp "^\\(?:git@github\\.com:\\|\\(?:git\\|https?\\|ssh\\)://.*@?github\\.com/\\)\\(.*\\)/\\(.*\\)\\(?:\\.git\\)?"))))
  '(global-display-line-numbers-mode t)
  '(global-flycheck-mode nil)
- '(global-linum-mode t)
+ '(global-linum-mode 1)
  '(global-spacemacs-whitespace-cleanup-mode t)
  '(line-move-visual t)
  '(markdown-command "multimarkdown")
@@ -786,7 +806,7 @@ This function is called at the very end of Spacemacs initialization."
    '(("github" :url "https://api.github.com" :remote-regexp "^\\(?:git@github\\.com:\\|\\(?:git\\|https?\\|ssh\\)://.*@?github\\.com/\\)\\(.*\\)/\\(.*\\)\\(?:\\.git\\)?")))
  '(global-display-line-numbers-mode t)
  '(global-flycheck-mode nil)
- '(global-linum-mode t)
+ '(global-linum-mode 1 t)
  '(global-spacemacs-whitespace-cleanup-mode t)
  '(grep-find-ignored-directories
    '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}"))
@@ -797,19 +817,27 @@ This function is called at the very end of Spacemacs initialization."
  '(line-move-visual t)
  '(linum-format "%5d")
  '(markdown-command "multimarkdown")
- '(org-agenda-files '("/Users/cmeadows/org/cb/meetings.org"))
+ '(org-agenda-files
+   '("/Users/cmeadows/org/refile.org" "/Users/cmeadows/org/cb/meetings.org" "/Users/cmeadows/org/"))
+ '(org-confirm-babel-evaluate nil)
+ '(org-export-with-section-numbers nil)
+ '(org-html-table-default-attributes
+   '(:border "2" :cellspacing "0" :cellpadding "6" :rules "groups" :frame "border"))
  '(org-list-allow-alphabetical t)
- '(org-plantuml-jar-path "/usr/local/bin/plantuml")
+ '(org-odt-preferred-output-format "docx")
+ '(org-pandoc-options-for-markdown t)
  '(org-refile-targets
-   '(("~/Dropbox/org/inbox.org" :maxlevel . 3)
-     ("~/Dropbox/org/someday.org" :level . 1)
-     ("~/Dropbox/org/tickler.org" :maxlevel . 2)
-     ("~/Dropbox/org/active.org" :maxlevel . 2)))
+   '(("~/org/inbox.org\12" :maxlevel . 3)
+     ("~/org/someday.org" :level . 1)
+     ("~/org/tickler.org" :maxlevel . 2)
+     ("~/org/active.org" :maxlevel . 3)))
+ '(org-roam-db-autosync-mode t)
  '(package-selected-packages
-   '(inspector systemd dash-docs lv transient polymode go-guru go-eldoc company-go go-mode org-mime ghub let-alist ein request-deferred websocket deferred csv-mode package-build pcre2el spinner gntp json-snatcher json-reformat parent-mode gitignore-mode logito pos-tip flycheck-mix flx anzu web-completion-data dash-functional pkg-info epl popup org-category-capture goto-chg marshal ht apib-mode org-jira powerline undo-tree flycheck-pos-tip diminish flycheck gh log4e f s winum solarized-theme madhat2r-theme fuzzy flycheck-credo org packed auto-complete evil multiple-cursors avy async alert dash sql-indent markdown-mode autothemer bind-key tern iedit bind-map elixir-mode request pcache projectile haml-mode js2-mode protobuf-mode xterm-color which-key web-mode shell-pop rspec-mode projectile-rails inflections ox-pandoc org-projectile neotree monokai-theme moe-theme info+ hungry-delete htmlize helm-ag git-timemachine git-link gist feature-mode evil-mc evil-matchit evil-magit erlang dumb-jump coffee-mode alchemist aggressive-indent ace-link smartparens highlight company helm helm-core yasnippet skewer-mode magit magit-popup git-commit with-editor hydra inf-ruby zonokai-theme zenburn-theme zen-and-art-theme yaml-mode ws-butler window-numbering web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacemacs-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode simple-httpd seti-theme scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop robe reverse-theme reveal-in-osx-finder restart-emacs rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters railscasts-theme quelpa purple-haze-theme puml-mode pug-mode professional-theme popwin planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pbcopy pastels-on-dark-theme paradox pandoc-mode osx-trash osx-dictionary orgit organic-green-theme org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-elixir noctilux-theme niflheim-theme naquadah-theme mustang-theme multi-term move-text monochrome-theme molokai-theme mmm-mode minitest minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls macrostep lush-theme lorem-ipsum livid-mode linum-relative link-hint light-soap-theme less-css-mode launchctl json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide ido-vertical-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-messenger gh-md gandalf-theme flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dracula-theme django-theme dash-at-point darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-web company-tern company-statistics column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode clues-theme clean-aindent-mode chruby cherry-blossom-theme busybee-theme bundler bubbleberry-theme birds-of-paradise-plus-theme bbdb badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme adaptive-wrap ace-window ace-jump-helm-line ac-ispell))
+   '(sqlite3 inspector systemd dash-docs lv transient polymode go-guru go-eldoc company-go go-mode org-mime ghub let-alist ein request-deferred websocket deferred csv-mode package-build pcre2el spinner gntp json-snatcher json-reformat parent-mode gitignore-mode logito pos-tip flycheck-mix flx anzu web-completion-data dash-functional pkg-info epl popup org-category-capture goto-chg marshal ht apib-mode org-jira powerline undo-tree flycheck-pos-tip diminish flycheck gh log4e f s winum solarized-theme madhat2r-theme fuzzy flycheck-credo org packed auto-complete evil multiple-cursors avy async alert dash sql-indent markdown-mode autothemer bind-key tern iedit bind-map elixir-mode request pcache projectile haml-mode js2-mode protobuf-mode xterm-color which-key web-mode shell-pop rspec-mode projectile-rails inflections ox-pandoc org-projectile neotree monokai-theme moe-theme info+ hungry-delete htmlize helm-ag git-timemachine git-link gist feature-mode evil-mc evil-matchit evil-magit erlang dumb-jump coffee-mode alchemist aggressive-indent ace-link smartparens highlight company helm helm-core yasnippet skewer-mode magit magit-popup git-commit with-editor hydra inf-ruby zonokai-theme zenburn-theme zen-and-art-theme yaml-mode ws-butler window-numbering web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacemacs-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode simple-httpd seti-theme scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop robe reverse-theme reveal-in-osx-finder restart-emacs rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters railscasts-theme quelpa purple-haze-theme puml-mode pug-mode professional-theme popwin planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pbcopy pastels-on-dark-theme paradox pandoc-mode osx-trash osx-dictionary orgit organic-green-theme org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-elixir noctilux-theme niflheim-theme naquadah-theme mustang-theme multi-term move-text monochrome-theme molokai-theme mmm-mode minitest minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls macrostep lush-theme lorem-ipsum livid-mode linum-relative link-hint light-soap-theme less-css-mode launchctl json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide ido-vertical-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-messenger gh-md gandalf-theme flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dracula-theme django-theme dash-at-point darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-web company-tern company-statistics column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode clues-theme clean-aindent-mode chruby cherry-blossom-theme busybee-theme bundler bubbleberry-theme birds-of-paradise-plus-theme bbdb badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme adaptive-wrap ace-window ace-jump-helm-line ac-ispell))
+ '(plantuml-indent-level 2)
  '(require-final-newline t)
  '(ruby-insert-encoding-magic-comment nil)
- '(typescript-indent-level 2 t)
+ '(typescript-indent-level 2)
  '(warning-suppress-types '((use-package) (use-package) (lsp-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

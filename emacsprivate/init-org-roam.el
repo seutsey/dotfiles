@@ -70,6 +70,11 @@
 
 (setq org-roam-directory "~/org/roam")
 
+;; KEY MAPPINGS
+(global-set-key "\C-crf" 'org-roam-node-find)
+(global-set-key "\C-cri" 'org-roam-node-insert)
+(global-set-key "\C-crt" 'org-roam-dailies-goto-today)
+
 ;; (require 'init-org-roam-func)
 
 (require 'org-crypt)
@@ -351,7 +356,7 @@ CREATED: %U
 (setq org-agenda-span 'day)
 
 (setq org-agenda-files
-      '("~/org" "~/org/cb" "~/org/cb/customers" "~/.org-jira"))
+      '("~/org" "~/org/cb" "~/org/cb/customers"))
 ;; It's hard to see them (at least with the default color). Also this is a
 ;; reccomended change to speed up the agenda (not that it's too slow for me).
 (setq org-agenda-dim-blocked-tasks nil)
