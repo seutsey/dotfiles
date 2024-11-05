@@ -94,11 +94,11 @@ source_files ~/.aliases \
 complete -o default -o nospace -F _git_checkout go
 #complete -W "`cat ~/.hcl/aliases`" hcl
 
-if command -v ps1_set >/dev/null 2>&1 ; then
-    ps1_set --prompt ∫
-else
-    export PS1="!!! It's \D{%H} O'Clock! Time to install rvm to fix your prompt!\n$ "
-fi
+# if command -v ps1_set >/dev/null 2>&1 ; then
+#     ps1_set --prompt ∫
+# else
+#     export PS1="!!! It's \D{%H} O'Clock! Time to install rvm to fix your prompt!\n$ "
+# fi
 
 PS1='[\u@\h \W$(__git_ps1 " (%s)")]\∫ '
 
@@ -138,7 +138,6 @@ fi
 
 PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-rvm default 2.5.7
 
 hitch() {
   command hitch "$@"
