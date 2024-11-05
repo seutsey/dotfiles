@@ -41,8 +41,8 @@ alias vu10s='vu10 && ssh dev-cmeadows-ub10'
 alias e='emacs'
 # alias e='emacsclient -t'
 alias ec='emacsclient -c'
-alias vim='vim -N'
-alias v='vim -N'
+alias vim='nvim -N'
+alias v='nvim -N'
 alias ed='emacs --daemon'
 
 # Programming crap
@@ -54,6 +54,7 @@ alias beg='bundle exec guard'
 alias bec='bundle exec cucumber'
 alias becw='bundle exec cucumber --profile wip'
 alias ber='bundle exec rspec'
+alias berr='bundle exec rspec && rubocop -a'
 alias berf='bundle exec rspec --fail-fast'
 alias berc='COVERAGE=1 bundle exec rspec'
 alias bers='bundle exec rspec spec'
@@ -145,3 +146,12 @@ alias search_segfault='for i in 1 2 3; do echo "***************$i*************";
 alias phgrep='cat ~/.persistent_history|grep --color'
 
 alias dockervolkill='docker volume rm $(/usr/local/bin/docker volume ls -f dangling=true -q)'
+
+
+alias tt="taskwarrior-tui"
+
+alias ts="/usr/local/bin/tsung"
+alias tsr="/usr/local/Cellar/tsung/1.7.0/lib/tsung/bin/tsung_stats.pl"
+
+alias aca-py='docker run --net=host bcgovimages/aries-cloudagent:py36-1.16-1_0.7.3'
+alias aca-py-stopall='docker stop $(docker ps -q --filter ancestor=bcgovimages/aries-cloudagent:py36-1.16-1_0.7.3 )'

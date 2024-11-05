@@ -1,20 +1,8 @@
-
 PATH=$HOME/.rvm/bin:$PATH:/usr/local/texlive/2013basic/bin/universal-darwin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH:/usr/texbin"
 
-PATH="/Users/cmeadows/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/cmeadows/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/cmeadows/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/cmeadows/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/cmeadows/perl5"; export PERL_MM_OPT;
-
-function update_fork {
-  git fetch upstream
-  git rebase upstream/production
-  git push origin -f
-}
 # Add this code to your .bashrc to save persistent history
 #
 # See http://eli.thegreenplace.net/2013/06/11/keeping-persistent-history-in-bash

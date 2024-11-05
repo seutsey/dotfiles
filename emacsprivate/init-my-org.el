@@ -164,7 +164,7 @@
 
 ; Use IDO for both buffer and file completion and ido-everywhere to t
 (setq org-completion-use-ido t)
-(setq ido-everywhere t)
+(setq ido-everywhere nil)
 (setq ido-max-directory-size 100000)
 (ido-mode (quote both))
 ; Use the current window when visiting files and buffers with ido
@@ -196,7 +196,7 @@
                ((org-agenda-overriding-header "Habits")
                 (org-agenda-sorting-strategy
                  '(todo-state-down effort-up category-keep))))
-              (" " "Agenda"
+              ("A" "Agenda"
                ((agenda "" nil)
                 (tags "REFILE"
                       ((org-agenda-overriding-header "Tasks to Refile")
@@ -794,7 +794,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 (setq org-ditaa-jar-path
       (expand-file-name "/usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar"))
 (setq org-plantuml-jar-path
-      (expand-file-name "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar"))
+      (expand-file-name "/usr/local/bin/plantuml"))
 
 (add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
 
@@ -816,7 +816,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
          (ruby . t)
          (gnuplot . t)
          (clojure . t)
-         (sh . t)
+         (shell . t)
          (ledger . t)
          (org . t)
          (plantuml . t)
@@ -1747,7 +1747,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (setq org-link-mailto-program (quote (compose-mail "%a" "%s")))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-(require 'smex)
+;; (require 'smex)
 (smex-initialize)
 
 (global-set-key (kbd "M-x") 'smex)
