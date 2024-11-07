@@ -107,7 +107,7 @@ PS1='[\u@\h \W$(__git_ps1 " (%s)")]\∫ '
 complete -o default -o nospace -W "$(grep -i -e '^host ' ~/.ssh/config | awk '{print substr($0, index($0,$2))}' ORS=' ')" ssh scp sftp
 
 # DANGER DANGER DANGER - Do not just slap paths in here willy-nilly. If it's a path to something outside of ~, it should probably go in /etc/paths.d!
-export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.4/bin:/Users/cmeadows/.mix/escripts
+export PATH=$PATH:~/bin:~/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/9.4/bin:/Users/shauneutsey/.mix/escripts
 # put MY bin first, THEN homebrew, THEN ports.
 export MANPATH=/usr/local/share/man:$MANPATH
 
@@ -152,7 +152,7 @@ _ssh_auth_save() {
 
 #export WORKON_HOME=$HOME/.virtualenvs
 #export PROJECT_HOME=$HOME/git/cmm/venv
-#source /Users/cmeadows/git/cmm/HamSAML/venv/bin/virtualenvwrapper.sh
+#source /Users/shauneutsey/git/cmm/HamSAML/venv/bin/virtualenvwrapper.sh
 export HISTFILE=~/.zsh-history-${ITERM_SESSION_ID}
 
 # DVM related loads
